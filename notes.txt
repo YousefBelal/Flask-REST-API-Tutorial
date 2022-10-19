@@ -1,0 +1,6 @@
+some codes meanings:
+    200 : no error
+    201 : created just fine
+    404 : not found
+    409 : already exist
+    204 : deleted just fine
