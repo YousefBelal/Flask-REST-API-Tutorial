@@ -22,7 +22,8 @@ class VideoModel(db.Model):
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
 
-	def __init__(self, name,views,likes,date):
+	def __init__(self,id,name,views,likes,date):
+		self.id = id
 		self.name = name
 		self.views = views
 		self.likes = likes
