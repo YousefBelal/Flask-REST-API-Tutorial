@@ -59,7 +59,7 @@ class Video(Resource):
 		return result
 
 	@marshal_with(resource_fields)
-	def put(self, video_id):
+	def post(self, video_id):
 		args=request.get_json()
 		d=args['date']
 		format = "%Y-%m-%d"
