@@ -9,7 +9,7 @@ from datetime import date
 
 app = Flask(__name__)
 api = Api(app)
-app.config['DATABASE_URL'] = 'postgres://feyqwkonocxeos:7af21936784101aa5e0cd7030b3e777d6c2e506d65e7867fbe71da185e7fd7f7@ec2-54-173-237-110.compute-1.amazonaws.com:5432/d28fqlnbl8s1gh'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://feyqwkonocxeos:7af21936784101aa5e0cd7030b3e777d6c2e506d65e7867fbe71da185e7fd7f7@ec2-54-173-237-110.compute-1.amazonaws.com:5432/d28fqlnbl8s1gh'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
