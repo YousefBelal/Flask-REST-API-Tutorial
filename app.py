@@ -1,26 +1,36 @@
 from datetime import date
+from this import d
 from flask import Flask,request
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import datetime
 from sqlalchemy import func
 from datetime import date
 
 app = Flask(__name__)
 api = Api(app)
-app.config['DATABASE_URL'] = 'postgres://feyqwkonocxeos:7af21936784101aa5e0cd7030b3e777d6c2e506d65e7867fbe71da185e7fd7f7@ec2-54-173-237-110.compute-1.amazonaws.com:5432/d28fqlnbl8s1gh'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://feyqwkonocxeos:7af21936784101aa5e0cd7030b3e777d6c2e506d65e7867fbe71da185e7fd7f7@ec2-54-173-237-110.compute-1.amazonaws.com:5432/d28fqlnbl8s1gh'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class VideoModel(db.Model):
+	__tablename__ = 'videoModel'
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(100), nullable=False)
 	views = db.Column(db.Integer, nullable=False)
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
 
+	def __init__(self, name,views,likes,date):
+		self.name = name
+		self.views = views
+		self.likes = likes
+		self.date = date
+
 	def __repr__(self):
 		return f"Video(name = {self.name}, views = {self.views}, likes = {self.likes},date = {self.date})"
-
 
 
 video_put_args = reqparse.RequestParser()
