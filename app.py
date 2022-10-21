@@ -101,9 +101,9 @@ class Video(Resource):
 		return {"message":"This video has been deleted successfully"} ,204
 
 
-@app.route('/api/test_add', methods=['POST'])
+@app.route('/api/test_add/<video_id>', methods=['POST'])
 @marshal_with(resource_fields)
-def post(self, video_id):
+def add_to_db(video_id):
 	args=request.get_json()
 	d=args['date']
 	format = "%Y-%m-%d"
