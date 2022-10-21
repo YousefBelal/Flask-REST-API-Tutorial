@@ -101,6 +101,21 @@ class Video(Resource):
 		return {"message":"This video has been deleted successfully"} ,204
 
 
+@app.route('/api/test_add', methods=['POST'])
+@marshal_with(resource_fields)
+def post(self, video_id):
+	args=request.get_json()
+	d=args['date']
+	format = "%Y-%m-%d"
+	dt_object = datetime.datetime.strptime(d, format)
+	result = VideoModel.query.filter_by(id=video_id).first()
+	if result:
+		abort(409, message="Video id taken...")
+
+	video = VideoModel(id=video_id, name=args['name'], views=args['views'], likes=args['likes'],date=dt_object)
+	db.session.add(video)
+	db.session.commit()
+	return video, 201
 
 
 @app.route('/api/test_date', methods=['POST'])
