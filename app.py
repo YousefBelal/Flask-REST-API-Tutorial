@@ -122,6 +122,11 @@ def add_to_db(video_id):
 	db.session.commit()
 	return video, 201
 
+@app.route('/api/test_add/<video_id>', methods=['GET'])
+def reload():
+	db.drop_all()
+	db.create_all()
+	return "reloaded"
 
 @app.route('/api/test_date', methods=['POST'])
 def add_entry():
