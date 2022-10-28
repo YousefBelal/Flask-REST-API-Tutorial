@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 import datetime
 from sqlalchemy import func
 from datetime import date
+from sqlalchemy import text
 
 app = Flask(__name__)
 api = Api(app)
@@ -22,7 +23,7 @@ class VideoModel(db.Model):
 	views = db.Column(db.Integer, nullable=False)
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
-	trending=db.Column(db.Boolean, nullable=False,server_default="True")
+	trending=db.Column(db.Boolean, nullable=False,server_default=text("True"))
 
 	def __init__(self,id,name,views,likes,date,trending):
 		self.id = id
