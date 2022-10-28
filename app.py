@@ -23,7 +23,7 @@ class VideoModel(db.Model):
 	views = db.Column(db.Integer, nullable=False)
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
-	trending=db.Column(db.Boolean, nullable=False,server_default=text("True"))
+	# trending=db.Column(db.Boolean, nullable=False,server_default=text("True"))
 
 	def __init__(self,id,name,views,likes,date,trending):
 		self.id = id
@@ -31,10 +31,10 @@ class VideoModel(db.Model):
 		self.views = views
 		self.likes = likes
 		self.date = date
-		self.trending = trending
+		# self.trending = trending
 
 	def __repr__(self):
-		return f"Video(name = {self.name}, views = {self.views}, likes = {self.likes},date = {self.date},trending = {self.trending})"
+		return f"Video(name = {self.name}, views = {self.views}, likes = {self.likes},date = {self.date})"
 
 
 video_put_args = reqparse.RequestParser()
@@ -109,6 +109,8 @@ class Video(Resource):
 @app.route('/api/test_add/<video_id>', methods=['POST'])
 @marshal_with(resource_fields)
 def add_to_db(video_id):
+	db.drop_all()
+	db.create_all()
 	args=request.get_json()
 	d=args['date']
 	format = "%Y-%m-%d"
