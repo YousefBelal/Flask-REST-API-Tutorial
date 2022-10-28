@@ -119,7 +119,7 @@ def add_to_db(video_id):
 	if result:
 		abort(409, message="Video id taken...")
 
-	video = VideoModel(id=video_id, name=args['name'], views=args['views'], likes=args['likes'],date=dt_object,trending=args['trending'])
+	video = VideoModel(id=video_id, name=args['name'], views=args['views'], likes=args['likes'],date=dt_object)
 	db.session.add(video)
 	db.session.commit()
 	return video, 201
