@@ -1,4 +1,5 @@
 from datetime import date
+from email.policy import default
 from flask import Flask,request
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
@@ -21,7 +22,7 @@ class VideoModel(db.Model):
 	views = db.Column(db.Integer, nullable=False)
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
-	trending=db.Column(db.Boolean, nullable=False)
+	trending=db.Column(db.Boolean, nullable=False,server_default="True")
 
 	def __init__(self,id,name,views,likes,date,trending):
 		self.id = id
