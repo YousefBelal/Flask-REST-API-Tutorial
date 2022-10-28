@@ -109,8 +109,6 @@ class Video(Resource):
 @app.route('/api/test_add/<video_id>', methods=['POST'])
 @marshal_with(resource_fields)
 def add_to_db(video_id):
-	db.drop_all()
-	db.create_all()
 	args=request.get_json()
 	d=args['date']
 	format = "%Y-%m-%d"
