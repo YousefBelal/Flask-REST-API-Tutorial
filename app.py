@@ -21,16 +21,18 @@ class VideoModel(db.Model):
 	views = db.Column(db.Integer, nullable=False)
 	likes = db.Column(db.Integer, nullable=False)
 	date=db.Column(db.Date, nullable=False)
+	trending=db.Column(db.Boolean, nullable=False)
 
-	def __init__(self,id,name,views,likes,date):
+	def __init__(self,id,name,views,likes,date,trending):
 		self.id = id
 		self.name = name
 		self.views = views
 		self.likes = likes
 		self.date = date
+		self.trending = trending
 
 	def __repr__(self):
-		return f"Video(name = {self.name}, views = {self.views}, likes = {self.likes},date = {self.date})"
+		return f"Video(name = {self.name}, views = {self.views}, likes = {self.likes},date = {self.date},trending = {self.trending})"
 
 
 video_put_args = reqparse.RequestParser()
